@@ -12,25 +12,25 @@
 
 <div class="tile" style="transform:translateX({35 * (3-index)}px); position: absolute;">
 
-  <div class="top" 
-    class:green="{score == 3 && !isBottomMark}"
-    class:yellow="{score == 2 && !isBottomMark}"
-    class:grey="{score == 1 && !isBottomMark}"
+  <div class="top"
+    class:green="{score == 3}"
+    class:yellow="{score == 2}"
+    class:grey="{score == 1}"
   >{#if !isBottomMark}<div>{char}</div>{/if}</div>
 
   <div class="mid transparent"></div>
 
   <div class="bottom"
-    class:green="{score == 3 && isBottomMark}"
-    class:yellow="{score == 2 && isBottomMark}"
-    class:grey="{score == 1 && isBottomMark}"
+    class:green="{score == 3}"
+    class:yellow="{score == 2}"
+    class:grey="{score == 1}"
   >{#if isBottomMark}<div>{char}</div>{/if}</div>
 
 </div>
 
 {:else}
 
-<div class="tile" style="z-index: 0">
+<div class="tile">
   <div class="top"></div>
   <div class="mid"
     class:green="{score == 3}"
@@ -62,19 +62,19 @@
 
 
 .top {
-  height: 30%; 
+  height: 30%;
 }
 .top > div {
   transform: translateY(-10px) translateX(-8px);
 }
 .mid {
-  height: 40%; 
+  height: 40%;
 }
 .mid > div {
   transform: translateY(-19px);
 }
 .bottom {
-  height: 30%; 
+  height: 30%;
 }
 .bottom > div {
   transform: translateY(-37px) translateX(-8px);

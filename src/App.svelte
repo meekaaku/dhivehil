@@ -1,10 +1,12 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import Tile from './Tile.svelte';
+  import CombinedTile from './CombinedTile.svelte';
   import Word from './Word.svelte';
   import Key from './Key.svelte';
   import Alert from './Alert.svelte';
   import {LETTERS, MARKS, WORDS} from './data'
+  import {sleep} from './util';
   let guesses: Array<Array<string>> = [
     ['','','','','',''],
     ['','','','','',''],
@@ -23,6 +25,15 @@
     [0, 0, 0, 0, 0, 0],
   ]
 
+  let tiles = [
+    [null, null, null],
+    [null, null, null],
+    [null, null, null],
+    [null, null, null],
+    [null, null, null],
+    [null, null, null],
+  ]
+
   let guessNumber = 0;
   let charNumber = 0;
   let targetWord = '';
@@ -30,7 +41,6 @@
   let tooFewLetters = false;
 
   const addChar = (ch: string) => {
-    console.log(`${charNumber} > ${guesses[0].length - 1}`);
     if (charNumber > guesses[0].length - 1) return;
     guesses[guessNumber][charNumber] = ch;
     charNumber++;
@@ -41,9 +51,9 @@
     guesses[guessNumber][--charNumber] = '';
   }
 
-  const checkWord = () => {
+  const checkWord = async () => {
     const guess: string = guesses[guessNumber].join('');
-    
+
     if(guess.length < 6){
       tooFewLetters = true;
       setTimeout(() => tooFewLetters = false, 2000);
@@ -57,11 +67,16 @@
     }
 
     const targetArray: string[] = targetWord.split('');
-    guesses[guessNumber].forEach((char, index) =>  {
-      if(char === targetArray[index]) {scores[guessNumber][index] = 3; return;}
-      if(targetArray.includes(char)) {scores[guessNumber][index] = 2; return;}
-      scores[guessNumber][index] = 1;
-    });
+    for(let index = 0; index < guesses[guessNumber].length; index++){
+
+      if(index % 2 === 0) tiles[guessNumber][Math.floor(index/2)].flip();
+      await sleep(200) ;
+
+      if(guesses[guessNumber][index] === targetArray[index]) scores[guessNumber][index] = 3;
+      else if(targetArray.includes(guesses[guessNumber][index])) scores[guessNumber][index] = 2;
+      else scores[guessNumber][index] = 1;
+    };
+
     guessNumber++;
     charNumber = 0;
   }
@@ -88,6 +103,7 @@
 <main>
   <Alert show={invalidWord}>ރަދީފުގައި ނެތް ބަހެއް</Alert>
   <Alert show={tooFewLetters}>އަކުރު އަދި މަދު</Alert>
+  <!--
   {#each guesses as guess, i}
     <Word>
     {#each guess as char, j}
@@ -95,7 +111,20 @@
     {/each}
     </Word>
   {/each}
-  
+  -->
+  {#each guesses as guess, i}
+    <Word>
+    {#each [0, 2, 4] as j}
+      <CombinedTile
+        letter={guess[j]}
+        mark={guess[j+1]}
+        letterScore={scores[i][j]}
+        markScore={scores[i][j+1]}
+        bind:this={tiles[i][j/2]}
+      ></CombinedTile>
+    {/each}
+    </Word>
+  {/each}
 
 
   <Word>
