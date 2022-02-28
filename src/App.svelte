@@ -5,7 +5,7 @@
   import Word from './Word.svelte';
   import Key from './Key.svelte';
   import Alert from './Alert.svelte';
-  import {LETTERS, MARKS, WORDS} from './data'
+  import {LETTERS, MARKS, WORDS, PRESENT, ABSENT, CORRECT} from './data'
   import {sleep} from './util';
   let guesses: Array<Array<string>> = [
     ['','','','','',''],
@@ -16,14 +16,16 @@
     ['','','','','',''],
   ];
 
-  let scores = [
+  let scores: Array<Array<number>> = [
     [0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0],
-  ]
+  ];
+
+  let keyboardScores: Object = {};
 
   let tiles = [
     [null, null, null],
@@ -40,41 +42,53 @@
   let invalidWord = false;
   let tooFewLetters = false;
 
-  const addChar = (ch: string) => {
+  function addChar(ch: string)
+  {
     if (charNumber > guesses[0].length - 1) return;
     guesses[guessNumber][charNumber] = ch;
     charNumber++;
   }
 
-  const removeChar = () => {
+  function removeChar()
+  {
     if (charNumber <= 0) return;
     guesses[guessNumber][--charNumber] = '';
   }
 
-  const checkWord = async () => {
+  async function checkWord()
+  {
     const guess: string = guesses[guessNumber].join('');
 
     if(guess.length < 6){
       tooFewLetters = true;
-      setTimeout(() => tooFewLetters = false, 2000);
+      await sleep(2000);
+      tooFewLetters = false;
       return;
     }
 
     if(!WORDS.includes(guess)){
       invalidWord = true;
-      setTimeout(() => invalidWord = false, 2000);
+      await sleep(2000);
+      invalidWord = false;
       return;
     }
 
     const targetArray: string[] = targetWord.split('');
     for(let index = 0; index < guesses[guessNumber].length; index++){
 
-      if(index % 2 === 0) tiles[guessNumber][Math.floor(index/2)].flip();
+      if (index % 2 === 0) tiles[guessNumber][Math.floor(index/2)].flip();
       await sleep(200) ;
 
-      if(guesses[guessNumber][index] === targetArray[index]) scores[guessNumber][index] = 3;
-      else if(targetArray.includes(guesses[guessNumber][index])) scores[guessNumber][index] = 2;
-      else scores[guessNumber][index] = 1;
+      let score = 0;
+      if (guesses[guessNumber][index] === targetArray[index])
+        score = CORRECT;
+      else if (targetArray.includes(guesses[guessNumber][index]))
+        score = PRESENT;
+      else
+        score = ABSENT;
+
+      scores[guessNumber][index] = score;
+      keyboardScores[guesses[guessNumber][index]] = score;
     };
 
     guessNumber++;
@@ -83,15 +97,16 @@
 
 
 
-  const selectTargetWord = (numChars: number) => {
+  function selectTargetWord(numChars: number)
+  {
     const validWords: string[] = [...WORDS].filter(w => w.length == numChars);
-    targetWord = validWords[Math.floor(Math.random() * validWords.length)];
-    console.log('valid words are ', validWords);
+    return validWords[Math.floor(Math.random() * validWords.length)];
   }
 
-  const startRound = (wordLength: number = 3, numGuesses: number = 6) => {
+  function startRound(wordLength: number = 3, numGuesses: number = 6)
+  {
     //Eg: for 3 letter words, there are 6 characters including the diacritic marks
-    selectTargetWord(wordLength * 2);
+    targetWord = selectTargetWord(wordLength * 2);
     console.log('Target word is ' + targetWord);
   }
 
@@ -129,25 +144,26 @@
 
   <Word>
   {#each [...LETTERS].slice(0, 12) as char}
-    <Key {char} score={1} on:click={()=>addChar(char)}></Key>
+    <Key {char} score={keyboardScores[char]} on:click={()=>addChar(char)}></Key>
   {/each}
   </Word>
-  <br />
 
   <Word>
   {#each [...LETTERS].slice(-12) as char}
-    <Key {char} score={1} on:click={()=>addChar(char)}></Key>
+    <Key {char} score={keyboardScores[char]} on:click={()=>addChar(char)}></Key>
   {/each}
   </Word>
-  <br />
 
-  {#each [...MARKS].reverse() as char}
-    <Key {char} score={1} on:click={()=>addChar(char)}></Key>
+  <Word>
+  {#each [...MARKS] as char}
+    <Key {char} score={keyboardScores[char]} on:click={()=>addChar(char)}></Key>
   {/each}
-  <br />
+  </Word>
 
-  <Key char="ޗެކް" score={1} on:click={checkWord} ></Key>
-  <Key char="ފަހަތަށް" score={1} on:click={removeChar}></Key>
+  <Word>
+  <Key char="ޗެކް" score={null} on:click={checkWord} ></Key>
+  <Key char="ފަހަތަށް" score={null} on:click={removeChar}></Key>
+  </Word>
 
 </main>
 

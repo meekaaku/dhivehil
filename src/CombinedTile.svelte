@@ -13,9 +13,6 @@
     flipped = !flipped;
     await sleep(300);
     flipped = !flipped;
-
-    //if(halt) return;
-    //setTimeout(() => flip(true), 300);
   }
 
 </script>
@@ -61,25 +58,30 @@
   opacity: 0;
 }
 
-
-
-
-
 .top {
   height: 30%;
 }
+
 .top > div {
   transform: translateY(-10px) translateX(-8px);
 }
+
+.top .unflipped {
+  background-color: blue;
+}
+
 .mid {
   height: 40%;
 }
+
 .mid > div {
   transform: translateY(-19px);
 }
+
 .bottom {
   height: 30%;
 }
+
 .bottom > div {
   transform: translateY(-37px) translateX(-8px);
 }
@@ -89,6 +91,7 @@
   transition: transform 0.3s;
   transform-style: preserve-3d;
 }
+
 .unflipped {
   transform: rotateX(0deg);
   transition: transform 0.3s;

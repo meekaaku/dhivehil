@@ -1,13 +1,14 @@
 <script lang="ts">
-import {MARKS} from './data';
 export let char: string;
 export let score: number;
 
 </script>
+<!--
 
+  -->
 
 <button class="key" on:click
-  class:white ="{score == 0}"
+  class:white="{score == 0}"
   class:grey="{score == 1}"
   class:yellow="{score == 2}"
   class:green="{score == 3}"
