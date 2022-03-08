@@ -41,6 +41,7 @@
   let targetWord = '';
   let invalidWord = false;
   let tooFewLetters = false;
+  let win = false;
 
   function addChar(ch: string)
   {
@@ -90,6 +91,14 @@
       scores[guessNumber][index] = score;
       keyboardScores[guesses[guessNumber][index]] = score;
     };
+    const totalScore = scores[guessNumber].reduce((curr, prev) => curr + prev);
+
+      console.log('Total score is '+ totalScore);
+    if (totalScore === 18){
+      win = true;
+      // Do win animation
+      return;
+    }
 
     guessNumber++;
     charNumber = 0;
@@ -105,6 +114,7 @@
 
   function startRound(wordLength: number = 3, numGuesses: number = 6)
   {
+    console.log("Hello");
     //Eg: for 3 letter words, there are 6 characters including the diacritic marks
     targetWord = selectTargetWord(wordLength * 2);
     console.log('Target word is ' + targetWord);
@@ -118,6 +128,7 @@
 <main>
   <Alert show={invalidWord}>ރަދީފުގައި ނެތް ބަހެއް</Alert>
   <Alert show={tooFewLetters}>އަކުރު އަދި މަދު</Alert>
+  <Alert show={win}>މަރުހަބާ!!</Alert>
   <!--
   {#each guesses as guess, i}
     <Word>
