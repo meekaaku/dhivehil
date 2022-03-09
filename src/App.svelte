@@ -36,12 +36,16 @@
     [null, null, null],
   ]
 
-  let guessNumber = 0;
-  let charNumber = 0;
-  let targetWord = '';
-  let invalidWord = false;
-  let tooFewLetters = false;
-  let win = false;
+  let alertWin;
+  let alertInvalidWord;
+  let alertTooShort;
+
+  let guessNumber: number = 0;
+  let charNumber: number = 0;
+  let targetWord: string = '';
+  let invalidWord: boolean = false;
+  let tooFewLetters: boolean = false;
+  let win: boolean = false;
 
   function addChar(ch: string)
   {
@@ -61,16 +65,12 @@
     const guess: string = guesses[guessNumber].join('');
 
     if(guess.length < 6){
-      tooFewLetters = true;
-      await sleep(2000);
-      tooFewLetters = false;
+      alertTooShort.show();
       return;
     }
 
     if(!WORDS.includes(guess)){
-      invalidWord = true;
-      await sleep(2000);
-      invalidWord = false;
+      alertInvalidWord.show();
       return;
     }
 
@@ -93,10 +93,15 @@
     };
     const totalScore = scores[guessNumber].reduce((curr, prev) => curr + prev);
 
-      console.log('Total score is '+ totalScore);
     if (totalScore === 18){
-      win = true;
-      // Do win animation
+      for (let i = 0; i < 2; i++){
+        for(let index = 0; index < guesses[guessNumber].length; index++){
+          if (index % 2 === 0) tiles[guessNumber][Math.floor(index/2)].jump();
+          await sleep(50) ;
+        }
+      }
+
+      alertWin.show();
       return;
     }
 
@@ -126,18 +131,10 @@
 </script>
 
 <main>
-  <Alert show={invalidWord}>ރަދީފުގައި ނެތް ބަހެއް</Alert>
-  <Alert show={tooFewLetters}>އަކުރު އަދި މަދު</Alert>
-  <Alert show={win}>މަރުހަބާ!!</Alert>
-  <!--
-  {#each guesses as guess, i}
-    <Word>
-    {#each guess as char, j}
-      <Tile {char} score={scores[i][j]} isMark={j % 2 == 1} index={j}></Tile>
-    {/each}
-    </Word>
-  {/each}
-  -->
+  <Alert bind:this={alertInvalidWord}>ރަދީފުގައި ނެތް ބަހެއް</Alert>
+  <Alert bind:this={alertTooShort}>އަކުރު އަދި މަދު</Alert>
+  <Alert bind:this={alertWin}>!!މަރުހަބާ</Alert>
+
   {#each guesses as guess, i}
     <Word>
     {#each [0, 2, 4] as j}

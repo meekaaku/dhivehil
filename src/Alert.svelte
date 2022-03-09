@@ -1,12 +1,21 @@
+<svelte:options accessors/>
 <script lang="ts">
-import { fade } from 'svelte/transition';
+  import { fade } from 'svelte/transition';
+  import {sleep} from './util';
 
-export let show: boolean;
+  let visible = false;
+
+  export async function show()
+  {
+    if(visible) return; // This prevents firing this off on repeated clicks
+    visible = true;
+    await sleep(2000);
+    visible = false;
+  }
 </script>
 
 
-
-{#if show}
+{#if visible}
 <div class="alert" transition:fade>
 <slot></slot>
 </div>
