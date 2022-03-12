@@ -1,12 +1,13 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import Tile from './Tile.svelte';
   import CombinedTile from './CombinedTile.svelte';
   import Word from './Word.svelte';
   import Key from './Key.svelte';
   import Alert from './Alert.svelte';
   import {LETTERS, MARKS, WORDS, PRESENT, ABSENT, CORRECT} from './data'
   import {sleep} from './util';
+
+  // The characters of the guessed words. Each element is the character.
   let guesses: Array<Array<string>> = [
     ['','','','','',''],
     ['','','','','',''],
@@ -16,6 +17,7 @@
     ['','','','','',''],
   ];
 
+  // Scores
   let scores: Array<Array<number>> = [
     [0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0],
@@ -41,7 +43,7 @@
   let alertInvalidWord;
   let alertTooShort;
 
-  let guessNumber: number = 0;
+  let guessNumber: number = 0;    // The guess number, currently we are giving 5 guesses, so 0-5
   let charNumber: number = 0;
   let targetWord: string = '';
 
