@@ -27,8 +27,10 @@
     [0, 0, 0, 0, 0, 0],
   ];
 
+  // Object to store scores for the keyboard so that the keys can be highlighted
   let keyboardScores: Object = {};
 
+  // Array of Svelete component for a tile
   let tiles = [
     [null, null, null],
     [null, null, null],
@@ -38,7 +40,7 @@
     [null, null, null],
   ]
 
-  // Components that are bound with bind:this
+  // Alert components that are bound with bind:this
   let alertWin;
   let alertInvalidWord;
   let alertTooShort;

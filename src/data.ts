@@ -1,9 +1,12 @@
 // Common data used in the game
 export const LETTERS = ['ހ','ށ','ނ','ރ','ބ','ޅ','ކ','އ','ވ','މ','ފ','ދ','ތ','ލ','ގ','ޏ','ސ','ޑ','ޒ','ޓ','ޔ','ޕ','ޗ'];
 export const MARKS = ['ަ','ާ','ި','ީ','ު','ޫ','ެ','ޭ','ޮ','ޯ','ް'];
-export const ABSENT = 1;
-export const PRESENT = 2;
-export const CORRECT = 3;
+
+export const ABSENT = 1;    // Char does not exist at all, highlighted in grey
+export const PRESENT = 2;   // Char exists but location wrong, highlighted in yellow
+export const CORRECT = 3;   // Correct char in correct position, highlighted in green
+
+// The dictionary
 export const WORDS = [
   'ހެދިކާ', 'ހިމޭން', 'ހައްލު', 'ހުކުރު', 'ހާދިސާ', 'ހާސިލު', 'ހާޒިރު', 'ހަލާކު','ހަލާލު','ހަލުވި','ހަމަލަ','ހަރުފަ','ހަވާދު','ހަވާސާ','ހެދުން',
   'ހަބަރު','ހަދިޔާ','ހަފްތާ','ހަކަތަ','ހަކުރު','ހަލާކު','ހަންޑި','ހަތުރު','ހެދުން','ހެދުނު','ހީވުން','ހެފުން','ހެރުން','ހިފުން','ހިލުން','ހިމާރު','ހިސާބު','ހިއްސާ',
