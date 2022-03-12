@@ -36,6 +36,7 @@
     [null, null, null],
   ]
 
+  // Components that are bound with bind:this
   let alertWin;
   let alertInvalidWord;
   let alertTooShort;
@@ -43,9 +44,6 @@
   let guessNumber: number = 0;
   let charNumber: number = 0;
   let targetWord: string = '';
-  let invalidWord: boolean = false;
-  let tooFewLetters: boolean = false;
-  let win: boolean = false;
 
   function addChar(ch: string)
   {
