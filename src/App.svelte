@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { Router, Route, Link } from "svelte-routing";
+  import Howto from "./Howto.svelte";
   import { onMount } from 'svelte';
   import CombinedTile from './CombinedTile.svelte';
   import Word from './Word.svelte';
@@ -129,7 +131,20 @@
 
 
   onMount(startRound);
+  
+  async function processJson()
+  {
+    const response = await fetch('/words.json');
+    const lines = await response.json();
+    const goodWords = [];
 
+    for(const line of lines){
+      if(line.approved_word_dv.length === 6){
+        goodWords.push(line.approved_word_dv);
+      }
+    }
+
+  }
 </script>
 
 <main>
@@ -187,9 +202,11 @@
 
 
   <div class="keyboardrow">
-  <Key char="ޗެކް" score={null} on:click={checkWord} ></Key>
   <Key char="ފަހަތަށް" score={null} on:click={removeChar}></Key>
+  <Key char="ޗެކް" score={null} on:click={checkWord} ></Key>
   </div>
+
+
 
 </main>
 
