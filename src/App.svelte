@@ -151,22 +151,67 @@
   }
 
 
+  function handleKeydown(event: KeyboardEvent) {
+      const thaanaMap: Record<string, string> = {
+        'h': '\u0780', // ހ
+        'S': '\u0781', // ށ
+        'n': '\u0782', // ނ
+        'r': '\u0783', // ރ
+        'b': '\u0784', // ބ
+        'L': '\u0785', // ޅ
+        'k': '\u0786', // ކ
+        'w': '\u0787', // އ
+        'v': '\u0788', // ވ
+        'm': '\u0789', // މ
+        'f': '\u078A', // ފ
+        'd': '\u078B', // ދ
+        't': '\u078C', // ތ
+        'l': '\u078D', // ލ
+        'g': '\u078E', // ގ
+        'N': '\u078F', // ޏ
+        's': '\u0790', // ސ
+        'D': '\u0791', // ޑ
+        'z': '\u0792', // ޒ
+        'T': '\u0793', // ޓ
+        'y': '\u0794', // ޔ
+        'p': '\u0795', // ޕ
+        'j': '\u0796', // ޖ
+        'c': '\u0797', // ޗ
+        
+        // Vowels (Fili)
+        'a': '\u07A6', // ަ
+        'A': '\u07A7', // ާ
+        'i': '\u07A8', // ި
+        'I': '\u07A9', // ީ
+        'u': '\u07AA', // ު
+        'U': '\u07AB', // ޫ
+        'e': '\u07AC', // ެ
+        'E': '\u07AD', // ޭ
+        'o': '\u07AE', // ޮ
+        'O': '\u07AF', // ޯ
+        'q': '\u07B0', // ް (Sukun)
+      };
+
+      if (event.key in thaanaMap) {
+        addChar(thaanaMap[event.key]);
+      }
+
+      if (event.key === 'Enter') {
+        checkWord();
+      }
+      if (event.key === 'Backspace') {
+        removeChar();
+      }
+  }
+
+
+
   onMount(startRound);
   
-  async function processJson()
-  {
-    const response = await fetch('/words.json');
-    const lines = await response.json();
-    const goodWords = [];
 
-    for(const line of lines){
-      if(line.approved_word_dv.length === 6){
-        goodWords.push(line.approved_word_dv);
-      }
-    }
-
-  }
 </script>
+
+<svelte:window on:keydown={handleKeydown} />
 
 <main>
   <span style="font-size: 1.5em; font-weight: bold;">ދިވެހިލް</span><br />
