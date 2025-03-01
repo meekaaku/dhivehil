@@ -16,11 +16,6 @@ export let fili: boolean=false;
 </button>
 
 <style>
-
-div  {
-  border: 1px solid black;
-}
-
 button {
   padding-left: 1rem;
   padding-right: 1rem;

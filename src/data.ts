@@ -200,9 +200,9 @@ export const WORDS = [
     "ނެތުން",
     "ނެގުން",
     "ނޭފަތް",
-    
+]; 
 
-
+export const REST = [
 
     "އަހަން",
     "އަހަނެ",

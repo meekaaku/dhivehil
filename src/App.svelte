@@ -169,7 +169,8 @@
 </script>
 
 <main>
-  <span style="font-size: 1.5em; font-weight: bold;">ދިވެހިލް</span>
+  <span style="font-size: 1.5em; font-weight: bold;">ދިވެހިލް</span><br />
+  <span style="font-size: 1.2em">ހ ނުވަތަ ނ އިން ފެށޭ ބަހެއް</span>
   <Alert bind:this={alertInvalidWord}>ރަދީފުގައި ނެތް ބަހެއް</Alert>
   <Alert bind:this={alertTooShort}>އަކުރު އަދި މަދު</Alert>
   <Alert bind:this={alertWin}>!!މަރުހަބާ</Alert>
@@ -182,6 +183,7 @@
     <button on:click={() => showHowto = true}>?</button>
     <button on:click={giveHint} disabled={hintsRemaining <= 0}>ހިންޓް    </button>
     <button on:click={surrender}>އަމާން</button>
+    <button on:click={() => window.location.reload()}>↻</button>
   </div>
 
 
@@ -265,7 +267,7 @@
     display: flex;
     flex-direction: row-reverse;
     justify-content: center;
-    gap: 0.5rem;
+    gap: 0.3rem;
   }
 
 
