@@ -20,7 +20,6 @@
 
   export async function jump()
   {
-    console.log('Jumping');
     jumpup = true; jumpdown = false;
     await sleep(70);
     jumpup = false; jumpdown = true;
@@ -76,7 +75,7 @@
 }
 
 .top > div {
-  transform: translateY(-10px) translateX(-8px);
+  transform: translateY(-2px) translateX(-8px);
 }
 
 .top .unflipped {
@@ -88,7 +87,7 @@
 }
 
 .mid > div {
-  transform: translateY(-19px);
+  transform: translateY(-15px);
 }
 
 .bottom {
@@ -96,7 +95,7 @@
 }
 
 .bottom > div {
-  transform: translateY(-37px) translateX(-8px);
+  transform: translateY(-30px) translateX(-8px);
 }
 
 .flipped {
