@@ -71,6 +71,6 @@ button:focus {
 
 .key {color: black; background-color: rgb(211, 214, 218); border: none; font-size: 20px}
 .green  {color: white; background-color: rgb(106, 170, 100);  border-color: rgb(106, 170, 100); }
-.yellow {color: white; background-color: rgb(201, 180, 88);   border-color: rgb(201, 180, 88) }
+.yellow {color: white; background-color: rgb(248, 132, 0);   border-color: rgb(201, 180, 88) }
 .grey   {color: white; background-color: rgb(120, 124, 126);  border-color: rgb(120, 124, 126)}
 .white  {color: black; background-color: white}

@@ -152,28 +152,44 @@
   {/each}
 
 
-  <Word>
-  {#each [...LETTERS].slice(0, 12) as char}
+  <div class="keyboardrow">
+  {#each [...LETTERS].slice(0, 8) as char}
     <Key {char} score={keyboardScores[char]} on:click={()=>addChar(char)}></Key>
   {/each}
-  </Word>
+  </div>
 
-  <Word>
-  {#each [...LETTERS].slice(-12) as char}
+  <div class="keyboardrow">
+    
+  {#each [...LETTERS].slice(8, 16) as char}
     <Key {char} score={keyboardScores[char]} on:click={()=>addChar(char)}></Key>
   {/each}
-  </Word>
+  </div>
 
-  <Word>
-  {#each [...MARKS] as char}
+  <div class="keyboardrow">
+  {#each [...LETTERS].slice(16, 24) as char}
     <Key {char} score={keyboardScores[char]} on:click={()=>addChar(char)}></Key>
   {/each}
-  </Word>
+  </div>
 
-  <Word>
+
+  <div class="keyboardrow">
+  {#each [...MARKS].slice(0, 6) as char}
+    <Key fili={true} {char} score={keyboardScores[char]} on:click={()=>addChar(char)}></Key>
+  {/each}
+  </div>
+
+  <div class="keyboardrow">
+  {#each [...MARKS].slice(6, 11) as char}
+    <Key fili={true} {char} score={keyboardScores[char]} on:click={()=>addChar(char)}></Key>
+  {/each}
+  </div>
+
+
+
+  <div class="keyboardrow">
   <Key char="ޗެކް" score={null} on:click={checkWord} ></Key>
   <Key char="ފަހަތަށް" score={null} on:click={removeChar}></Key>
-  </Word>
+  </div>
 
 </main>
 
@@ -189,7 +205,14 @@
 
 	@media (min-width: 640px) {
 		main {
-			max-width: none;
+			max-width: 768px;
 		}
 	}
+
+  .keyboardrow {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    gap: 0.5rem;
+  }
 </style>

@@ -1,5 +1,5 @@
 // Common data used in the game
-export const LETTERS = ['ހ','ށ','ނ','ރ','ބ','ޅ','ކ','އ','ވ','މ','ފ','ދ','ތ','ލ','ގ','ޏ','ސ','ޑ','ޒ','ޓ','ޔ','ޕ','ޗ'];
+export const LETTERS = ['ހ','ށ','ނ','ރ','ބ','ޅ','ކ','އ','ވ','މ','ފ','ދ','ތ','ލ','ގ','ޏ','ސ','ޑ','ޒ','ޓ','ޔ','ޕ','ޖ','ޗ'];
 export const MARKS = ['ަ','ާ','ި','ީ','ު','ޫ','ެ','ޭ','ޮ','ޯ','ް'];
 
 export const ABSENT = 1;    // Char does not exist at all, highlighted in grey
