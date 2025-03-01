@@ -1,11 +1,11 @@
 <script lang="ts">
   import { Router, Route, Link } from "svelte-routing";
-  import Howto from "./Howto.svelte";
   import { onMount } from 'svelte';
   import CombinedTile from './CombinedTile.svelte';
   import Word from './Word.svelte';
   import Key from './Key.svelte';
   import Alert from './Alert.svelte';
+  import Howto from './Howto.svelte';
   import {LETTERS, MARKS, WORDS, PRESENT, ABSENT, CORRECT} from './data'
   import {sleep} from './util';
 
@@ -50,6 +50,7 @@
   let guessNumber: number = 0;    // The guess number, currently we are giving 5 guesses, so 0-5
   let charNumber: number = 0;
   let targetWord: string = '';
+  let showHowto: boolean = false;
 
   function addChar(ch: string)
   {
@@ -123,10 +124,10 @@
 
   function startRound(wordLength: number = 3, numGuesses: number = 6)
   {
-    console.log("Hello");
+    console.log("Round started");
     //Eg: for 3 letter words, there are 6 characters including the diacritic marks
     targetWord = selectTargetWord(wordLength * 2);
-    console.log('Target word is ' + targetWord);
+    //console.log('Target word is ' + targetWord);
   }
 
 
@@ -151,6 +152,10 @@
   <Alert bind:this={alertInvalidWord}>ރަދީފުގައި ނެތް ބަހެއް</Alert>
   <Alert bind:this={alertTooShort}>އަކުރު އަދި މަދު</Alert>
   <Alert bind:this={alertWin}>!!މަރުހަބާ</Alert>
+
+  {#if showHowto}
+    <Howto bind:show={showHowto}></Howto>
+  {/if}
 
   {#each guesses as guess, i}
     <Word>
@@ -207,6 +212,7 @@
   </div>
 
 
+  <button on:click={() => showHowto = true}>ކުޅެނީ ކިހިނެތް؟</button>
 
 </main>
 
