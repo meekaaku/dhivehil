@@ -51,6 +51,7 @@
   let charNumber: number = 0;
   let targetWord: string = '';
   let showHowto: boolean = false;
+  let hintsRemaining: number = 2;
 
   function addChar(ch: string)
   {
@@ -127,7 +128,26 @@
     console.log("Round started");
     //Eg: for 3 letter words, there are 6 characters including the diacritic marks
     targetWord = selectTargetWord(wordLength * 2);
-    //console.log('Target word is ' + targetWord);
+    console.log('Target word is ' + targetWord);
+  }
+
+  function giveHint() {
+    if(hintsRemaining <= 0) return;
+    const splits = targetWord.split('');
+    addChar(splits[charNumber]);
+    hintsRemaining--;
+  }
+
+  function surrender() {
+
+    for(let i = 0; i < 6; i++)
+      removeChar();
+
+    const splits = targetWord.split('');
+    for(let i = 0; i < splits.length; i++){
+      addChar(splits[i]);
+    }
+    checkWord();
   }
 
 
@@ -149,6 +169,7 @@
 </script>
 
 <main>
+  <span style="font-size: 1.5em; font-weight: bold;">ދިވެހިލް</span>
   <Alert bind:this={alertInvalidWord}>ރަދީފުގައި ނެތް ބަހެއް</Alert>
   <Alert bind:this={alertTooShort}>އަކުރު އަދި މަދު</Alert>
   <Alert bind:this={alertWin}>!!މަރުހަބާ</Alert>
@@ -156,6 +177,13 @@
   {#if showHowto}
     <Howto bind:show={showHowto}></Howto>
   {/if}
+
+  <div class="sidebar">
+    <button on:click={() => showHowto = true}>?</button>
+    <button on:click={giveHint} disabled={hintsRemaining <= 0}>ހިންޓް    </button>
+    <button on:click={surrender}>އަމާން</button>
+  </div>
+
 
   {#each guesses as guess, i}
     <Word>
@@ -212,14 +240,14 @@
   </div>
 
 
-  <button on:click={() => showHowto = true}>ކުޅެނީ ކިހިނެތް؟</button>
 
-</main>
+  </main>
 
 <style>
 	main {
 		text-align: center;
 		padding: 1em;
+    padding-top: 0;
 		max-width: 240px;
 		margin: 0 auto;
 	}
@@ -230,6 +258,7 @@
 		main {
 			max-width: 768px;
 		}
+  
 	}
 
   .keyboardrow {
@@ -237,5 +266,17 @@
     flex-direction: row-reverse;
     justify-content: center;
     gap: 0.5rem;
+  }
+
+
+  .sidebar {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 0;
+    right: 0;
+    margin-right: 1em;
+    margin-top: 1em;
+    z-index: 100;
   }
 </style>

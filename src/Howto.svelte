@@ -28,6 +28,8 @@ export let show:boolean = false;
 <span style="color: rgb(106, 170, 100);">■</span>
       ފެހި: އަކުރު ނުވަތަ ފިލި މުޅިން ދިމާވެފަ
      <br /> 
+     <br /> 
+     <br /> 
  
       
 
