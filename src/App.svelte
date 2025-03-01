@@ -128,7 +128,7 @@
     console.log("Round started");
     //Eg: for 3 letter words, there are 6 characters including the diacritic marks
     targetWord = selectTargetWord(wordLength * 2);
-    console.log('Target word is ' + targetWord);
+    //console.log('Target word is ' + targetWord);
   }
 
   function giveHint() {
