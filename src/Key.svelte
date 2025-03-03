@@ -37,6 +37,10 @@ button:disabled {
   cursor: not-allowed;
 }
 
+button:hover:not(:disabled) {
+  background-color: #d9d9d9;
+}
+
 .fili {
   padding-right: 1.6rem;
 }
