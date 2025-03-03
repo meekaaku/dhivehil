@@ -2,6 +2,7 @@
 export let char: string;
 export let score: number;
 export let fili: boolean=false;
+export let disabled: boolean=false;
 
 </script>
 
@@ -11,6 +12,7 @@ export let fili: boolean=false;
   class:yellow="{score == 2}"
   class:green="{score == 3}"
   class:fili
+  {disabled}
 >
    {char}
 </button>

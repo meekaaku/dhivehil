@@ -192,6 +192,10 @@
         'q': '\u07B0', // ް (Sukun)
       };
 
+      // Allow only letter fili letter fili...
+      if(charNumber % 2 === 0 && thaanaMap[event.key]?.charCodeAt(0) > 0x07A0) return;
+      if(charNumber % 2 === 1 && thaanaMap[event.key]?.charCodeAt(0) < 0x07A0) return;
+
       if (event.key in thaanaMap) {
         addChar(thaanaMap[event.key]);
       }
@@ -254,33 +258,33 @@
 
   <div class="keyboardrow">
   {#each [...LETTERS].slice(0, 8) as char}
-    <Key {char} score={keyboardScores[char]} on:click={()=>addChar(char)}></Key>
+    <Key {char} score={keyboardScores[char]} on:click={()=>addChar(char)} disabled={charNumber %2 === 1}></Key>
   {/each}
   </div>
 
   <div class="keyboardrow">
     
   {#each [...LETTERS].slice(8, 16) as char}
-    <Key {char} score={keyboardScores[char]} on:click={()=>addChar(char)}></Key>
+    <Key {char} score={keyboardScores[char]} on:click={()=>addChar(char)} disabled={charNumber %2 === 1}></Key>
   {/each}
   </div>
 
   <div class="keyboardrow">
   {#each [...LETTERS].slice(16, 24) as char}
-    <Key {char} score={keyboardScores[char]} on:click={()=>addChar(char)}></Key>
+    <Key {char} score={keyboardScores[char]} on:click={()=>addChar(char)} disabled={charNumber %2 === 1}></Key>
   {/each}
   </div>
 
 
   <div class="keyboardrow">
   {#each [...MARKS].slice(0, 6) as char}
-    <Key fili={true} {char} score={keyboardScores[char]} on:click={()=>addChar(char)}></Key>
+    <Key fili={true} {char} score={keyboardScores[char]} on:click={()=>addChar(char)}  disabled={charNumber %2 === 0}></Key>
   {/each}
   </div>
 
   <div class="keyboardrow">
   {#each [...MARKS].slice(6, 11) as char}
-    <Key fili={true} {char} score={keyboardScores[char]} on:click={()=>addChar(char)}></Key>
+    <Key fili={true} {char} score={keyboardScores[char]} on:click={()=>addChar(char)} disabled={charNumber %2 === 0}></Key>
   {/each}
   </div>
 
