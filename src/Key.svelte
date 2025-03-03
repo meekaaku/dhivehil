@@ -22,6 +22,42 @@ button {
   padding-left: 1rem;
   padding-right: 1rem;
   border-radius: 5px;
+  border: none;
+  background-color: #e6e6e6;
+  color: #1a1a1a;
+  font-size: 1.2em;
+  cursor: pointer;
+  margin: 0.2rem;
+  transition: all 0.2s;
+
+  &:hover:not(:disabled) {
+    background-color: #d9d9d9;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &.white {
+    background-color: #787c7e;
+    color: white;
+  }
+
+  &.grey {
+    background-color: #787c7e;
+    color: white;
+  }
+
+  &.yellow {
+    background-color: #f88400;
+    color: white;
+  }
+
+  &.green {
+    background-color: #6aaa64;
+    color: white;
+  }
 }
 
 .fili {

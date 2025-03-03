@@ -219,8 +219,8 @@
 
 <main>
   <span style="font-size: 1.5em; font-weight: bold;">ދިވެހިލް</span><br />
-  <span style="font-size: 1.2em">ހ ނުވަތަ ނ އިން ފެށޭ ބަހެއް</span>
-  <Alert bind:this={alertInvalidWord}>ރަދީފުގައި ނެތް ބަހެއް</Alert>
+  <span style="font-size: 1.2em">ހ،ނ،އ ނުވަތަ ދ އިން ފެށޭ ބަހެއް</span>
+  <Alert bind:this={alertInvalidWord}>ރަދީފުގައި ނެތް ބަހެއް މިވަގުތު</Alert>
   <Alert bind:this={alertTooShort}>އަކުރު އަދި މަދު</Alert>
   <Alert bind:this={alertWin}>!!މަރުހަބާ</Alert>
 
