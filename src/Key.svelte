@@ -30,34 +30,11 @@ button {
   margin: 0.2rem;
   transition: all 0.2s;
 
-  &:hover:not(:disabled) {
-    background-color: #d9d9d9;
-  }
+}
 
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-
-  &.white {
-    background-color: #787c7e;
-    color: white;
-  }
-
-  &.grey {
-    background-color: #787c7e;
-    color: white;
-  }
-
-  &.yellow {
-    background-color: #f88400;
-    color: white;
-  }
-
-  &.green {
-    background-color: #6aaa64;
-    color: white;
-  }
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .fili {
