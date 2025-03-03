@@ -66,6 +66,7 @@ export let show:boolean = false;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   padding-right: 1em;
   padding-left: 3em;
+  z-index:1000;
 }
 .overlay {
   position: fixed;
@@ -77,6 +78,6 @@ export let show:boolean = false;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 40;
+  z-index: 900;
 }
 </style>
